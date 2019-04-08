@@ -2,6 +2,7 @@
 #define _ED_LIBRARY_H_INCLUDED_
 
 #include <iostream>
+#include <vector>
 #include <Eigen/Dense>
 #include <cmath>
 #include <clocale>
