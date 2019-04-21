@@ -7,8 +7,12 @@ void check_tb_validity(void);
 
 int main(int argc, char* argv[])
 {
-  cout << "Enter lattice size and U: ";
-  cin >> size >> U; assert(size%2==0);
+  // cout << "Enter lattice size and U: ";
+  // cin >> size >> U; assert(size%2==0);
+  if(argc!=3){cerr << "Enter (1) lattice size, (2) U." << endl; exit(1);}
+  size = std::atoi(argv[1]) ; 
+  U = std::atof(argv[2]); 
+  assert(size%2 == 0);
 
   vector<basis> half_filling; select_half_filling(half_filling);
   std::vector<basis> v_spin;
@@ -28,9 +32,11 @@ int main(int argc, char* argv[])
     // cout << Ht << endl << endl;
 
     std::vector<double> ith_spin_eivals; MatrixXd ith_eigenvectors;
+    
     diagonalize(H, ith_spin_eivals, ith_eigenvectors);
-
+    
     eigenvalues.insert(eigenvalues.end(),ith_spin_eivals.begin(),ith_spin_eivals.end());
+
     v_spin.clear(); ith_spin_eivals.clear(); cout << endl;
   }
 

@@ -6,25 +6,6 @@
 
 void check_consistency();
 
-void select_filling(std::vector<basis>& selected_filling, int fill)
-{
-  long int i_min,i_max; i_min=i_max=0;
-  // if(fill<=size)
-  {
-    for(int i=0; i<fill; i++) i_min += pow(2,i);
-    for(int i=2*size-fill; i<2*size; i++) i_max += pow(2,i);
-    for(int i=i_min; i<=i_max; i++)
-    {
-      if(inttobin(i).sum()==fill) selected_filling.push_back(basis(i));
-    }
-  }
-  // else
-  // {
-  //   for(int i=0; i<size; i++) i_min += pow(2,i);
-  //   for()
-  // }
-}
-
 
 int main(int argc, char* argv[])
 {

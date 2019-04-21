@@ -79,7 +79,9 @@ int create(VectorXi v, int index, int sigma)
   int ph=0; int vec_size = v.size()/2;
 
   if(sigma==-1)
-  { for(int i=vec_size-1; i>index; i--) ph += v(i)+v(i+vec_size);}
+  { 
+    for(int i=vec_size-1; i>index; i--) ph += v(i)+v(i+vec_size);
+  }
   else if(sigma==1)
   {
     for(int i=vec_size-1; i>index; i--) ph += v(i);
@@ -268,11 +270,13 @@ void construct_HU(MatrixXd& HU, std::vector<basis> v_spin)
 bool diagonalize(MatrixXd Ac, VectorXd& lambdac, MatrixXd& vc)
 {
   int N;
+
   if(Ac.cols()==Ac.rows())  N = Ac.cols(); else return false;
+  
 
   lambdac.resize(N);
   vc.resize(N,N);
-
+  
   int LDA = N;
   int INFO = 0;
   char Uchar = 'U';
@@ -281,11 +285,13 @@ bool diagonalize(MatrixXd Ac, VectorXd& lambdac, MatrixXd& vc)
 
   int LWORK = 5*(2*LDA*LDA+6*LDA+1);
   int LIWORK = 5*(3+5*LDA);
+  cout << LWORK << " " << LIWORK << endl;
 
   VectorXd WORK(LWORK);
   VectorXi IWORK(IWORK);
 
-  dsyevd_(&Vchar, &Uchar, &N, Ac.data(), &LDA, lambdac.data(),  WORK.data(), &LWORK, IWORK.data(), &LIWORK, &INFO);
+  //dsyevd_(&Vchar, &Uchar, &N, Ac.data(), &LDA, lambdac.data(),  WORK.data(), &LWORK, IWORK.data(), &LIWORK, &INFO);
+  
   vc = Ac;
   return INFO==0;
 }
